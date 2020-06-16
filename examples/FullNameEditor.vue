@@ -23,7 +23,7 @@
       value: {
         type: String,
         required: false,
-        default: 'John Doe'
+        default: ''
       }
     },
     watch: {
