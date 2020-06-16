@@ -1,6 +1,10 @@
 <template>
   <div class="wrapper">
-    <FullNameEditor v-bind:full-name="fullName" />
+    <FullNameEditor v-model="fullName"/>
+    <p>
+      Parent editor:
+      <input type="text" v-model="fullName">
+    </p>
     <p>Full name: {{ fullName }}</p>
   </div>
 </template>
@@ -15,6 +19,11 @@
     data () {
       return {
         fullName: 'Riki Fridrich'
+      }
+    },
+    methods: {
+      handleNameChange (newFullName) {
+        this.fullName = newFullName
       }
     }
   }
