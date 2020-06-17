@@ -4,11 +4,25 @@ const cors = require('cors')
 const app = express()
 const port = 3000
 
-const serversList = [
-  {id: 'server1', ip: '123.456.789', host: 'www.google.com'},
-  {id: 'server2', ip: '456.789.123', host: 'www.t-mobile.com'},
-  {id: 'server3', ip: '789123.456', host: 'www.fczbkk.com'},
+const randomHosts = [
+  'www.google.com',
+  'www.t-mobile.cz',
+  'www.t-mobile.sk',
+  'www.fczbkk.com'
 ]
+
+function generateRandomServer (id) {
+  return {
+    id: id,
+    ip: Math.round(Math.random() * 100000),
+    host: randomHosts[Math.floor(Math.random() * randomHosts.length)]
+  }
+}
+
+const serversList = []
+for (let i = 0; i < 100; i++) {
+  serversList[i] = generateRandomServer(i + 1)
+}
 
 app.use(cors())
 
@@ -19,7 +33,7 @@ app.get('/', (req, res) => {
 app.get('/servers_list', (req, res) => {
   setTimeout(() => {
     res.send(serversList)
-  }, 3000)
+  }, 1000)
 })
 
 app.listen(port, () => {
